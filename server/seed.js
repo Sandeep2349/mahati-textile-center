@@ -368,8 +368,8 @@ const seedDatabase = async () => {
 
     console.log('Seeding default Store Administrator account...');
     const adminUser = new User({
-      username: 'admin',
-      password: 'AdminPassword123!',
+      username: 'ad',
+      password: '************',
       name: 'Mahati Store Manager',
       role: 'admin',
       isActive: true,
