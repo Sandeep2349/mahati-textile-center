@@ -23,11 +23,7 @@ const AdminLogin = ({ onLoginSuccess, onBackToStore }) => {
         setError(res.message || 'Invalid credentials');
       }
     } catch (err) {
-      if (!err.response) {
-        setError('Cannot connect to backend server. If deployed, verify your backend URL in VITE_API_URL.');
-      } else {
-        setError(err.response?.data?.message || 'Login failed. Please check credentials.');
-      }
+      setError(err.response?.data?.message || 'Login failed. Please check credentials.');
     } finally {
       setLoading(false);
     }
