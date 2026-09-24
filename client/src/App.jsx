@@ -74,7 +74,7 @@ function App() {
   // If in Admin Login
   if (currentPage === 'admin-login') {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+      <div className="min-h-screen bg-slate-50 flex flex-col justify-between overflow-x-hidden w-full max-w-full">
         <Header
           onNavigate={navigate}
           currentPage={currentPage}
@@ -95,7 +95,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between">
+    <div className="min-h-screen bg-slate-50 flex flex-col justify-between overflow-x-hidden w-full max-w-full">
       {/* Universal Store Header */}
       <Header
         onNavigate={navigate}

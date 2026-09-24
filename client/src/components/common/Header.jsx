@@ -33,14 +33,17 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-rose-100 shadow-sm transition-all">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-rose-100 shadow-sm transition-all overflow-x-hidden w-full">
       {/* Top Banner: Zero Cost & Store Promise */}
-      <div className="bg-gradient-to-r from-red-900 via-red-800 to-amber-900 text-amber-100 text-xs py-1.5 px-4 font-medium flex items-center justify-between">
-        <div className="flex items-center gap-2 mx-auto sm:mx-0">
-          <ShieldCheck className="w-3.5 h-3.5 text-amber-300" />
-          <span>100% Direct NPCI UPI Payments • Zero Payment Gateway Surcharge • Store Pickup Available</span>
+      <div className="bg-gradient-to-r from-red-900 via-red-800 to-amber-900 text-amber-100 text-xs py-1 px-3 sm:px-4 font-medium flex items-center justify-between overflow-hidden">
+        <div className="flex items-center gap-1.5 mx-auto sm:mx-0 truncate">
+          <ShieldCheck className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+          <span className="truncate text-[11px] sm:text-xs">
+            <span className="sm:hidden">Direct UPI Payments • Store Pickup Available</span>
+            <span className="hidden sm:inline">100% Direct NPCI UPI Payments • Zero Payment Gateway Surcharge • Store Pickup Available</span>
+          </span>
         </div>
-        <div className="hidden sm:flex items-center gap-4 text-[11px] text-amber-200">
+        <div className="hidden sm:flex items-center gap-4 text-[11px] text-amber-200 shrink-0">
           <button
             onClick={onOpenTrackOrder}
             className="hover:text-amber-100 underline flex items-center gap-1 font-semibold"
@@ -54,35 +57,38 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
       </div>
 
       {/* Main Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none"
-          aria-label="Toggle Navigation"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-2 sm:gap-4 overflow-hidden">
+        {/* Left: Mobile Hamburger & Brand Logo */}
+        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          {/* Mobile Hamburger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-1.5 sm:p-2 rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none shrink-0"
+            aria-label="Toggle Navigation"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+          </button>
 
-        {/* Brand Logo */}
-        <div
-          onClick={() => onNavigate('home')}
-          className="flex items-center gap-3 cursor-pointer group select-none"
-        >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-800 to-red-950 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
-            <Store className="w-5 h-5 text-amber-300" />
-          </div>
-          <div>
-            <span className="block text-xl font-bold tracking-tight text-gray-900 leading-tight">
-              Mahati <span className="text-red-800">Textile Center</span>
-            </span>
-            <span className="block text-[11px] text-gray-500 font-medium tracking-wide uppercase">
-              Retail • Wholesale • Handlooms
-            </span>
+          {/* Brand Logo */}
+          <div
+            onClick={() => onNavigate('home')}
+            className="flex items-center gap-2 sm:gap-3 cursor-pointer group select-none min-w-0"
+          >
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-red-800 to-red-950 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform shrink-0">
+              <Store className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
+            </div>
+            <div className="min-w-0">
+              <span className="block text-sm sm:text-lg md:text-xl font-bold tracking-tight text-gray-900 leading-tight truncate">
+                Mahati <span className="text-red-800">Textile Center</span>
+              </span>
+              <span className="hidden sm:block text-[11px] text-gray-500 font-medium tracking-wide uppercase truncate">
+                Retail • Wholesale • Handlooms
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Search Bar */}
+        {/* Search Bar (Desktop) */}
         <form
           onSubmit={handleSearchSubmit}
           className="hidden md:flex flex-1 max-w-md mx-4 relative items-center"
@@ -97,11 +103,11 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
           />
         </form>
 
-        {/* Action Buttons: Track Order, Cart & Admin */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        {/* Action Buttons: Track Order, Cart & Admin Lock */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <button
             onClick={() => onNavigate('shop')}
-            className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition ${
+            className={`hidden sm:block px-3 py-1.5 rounded-lg text-sm font-semibold transition ${
               currentPage === 'shop'
                 ? 'bg-red-50 text-red-800'
                 : 'text-gray-700 hover:text-red-800 hover:bg-gray-50'
@@ -113,7 +119,7 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
           {/* Track Order Button */}
           <button
             onClick={onOpenTrackOrder}
-            className="px-2.5 sm:px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:text-red-800 hover:bg-red-50 transition flex items-center gap-1.5 border border-slate-200 sm:border-transparent"
+            className="p-2 sm:px-3 sm:py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:text-red-800 hover:bg-red-50 transition flex items-center gap-1.5 border border-slate-200 sm:border-transparent shrink-0"
             title="Track orders by 10-digit mobile number"
           >
             <Truck className="w-4 h-4 text-red-700" />
@@ -123,22 +129,22 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
           {/* Cart Icon */}
           <button
             onClick={openDrawer}
-            className="relative p-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-900 transition flex items-center gap-2 font-medium text-sm"
+            className="relative p-2 sm:p-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-900 transition flex items-center gap-1.5 font-medium text-sm shrink-0"
             aria-label="Shopping Cart"
           >
-            <ShoppingBag className="w-5 h-5" />
+            <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
             <span className="hidden sm:inline">Cart</span>
             {totalItemsCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-red-700 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md animate-pulse">
+              <span className="absolute -top-1 -right-1 bg-red-700 text-white text-[10px] font-bold rounded-full w-4 h-4 sm:w-5 sm:h-5 sm:text-xs flex items-center justify-center shadow-md">
                 {totalItemsCount}
               </span>
             )}
           </button>
 
-          {/* Admin Login / Dashboard link */}
+          {/* Admin Login / Lock button */}
           <button
             onClick={() => onNavigate('admin')}
-            className="p-2.5 rounded-xl border border-gray-200 text-gray-600 hover:text-red-800 hover:bg-gray-50 transition"
+            className="p-2 sm:p-2.5 rounded-xl border border-gray-200 text-gray-600 hover:text-red-800 hover:bg-gray-50 transition shrink-0"
             title="Merchant & Walk-In POS Portal"
           >
             <Lock className="w-4 h-4" />
@@ -147,13 +153,13 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
       </div>
 
       {/* Category Navigation Bar (Desktop & Mobile Swipeable) */}
-      <nav className="border-t border-rose-100/70 bg-white">
+      <nav className="border-t border-rose-100/70 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center gap-1.5 overflow-x-auto py-2 scrollbar-none">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => handleCategoryClick(cat.id)}
-              className={`px-4 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all ${
+              className={`px-3 sm:px-4 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all shrink-0 ${
                 category === cat.id
                   ? 'bg-red-800 text-white shadow-sm'
                   : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
@@ -189,6 +195,18 @@ const Header = ({ onNavigate, currentPage, onOpenTrackOrder }) => {
           >
             <Truck className="w-4 h-4 text-red-700" />
             <span>Track Order (By Phone Number)</span>
+          </button>
+
+          {/* Merchant & POS Portal shortcut in Mobile Menu */}
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onNavigate('admin');
+            }}
+            className="w-full py-2.5 px-3 bg-slate-900 text-white hover:bg-slate-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-sm"
+          >
+            <Lock className="w-4 h-4 text-amber-300" />
+            <span>Merchant & Walk-In POS Portal</span>
           </button>
 
           <div className="font-semibold text-xs text-gray-400 uppercase tracking-wider pt-1">
