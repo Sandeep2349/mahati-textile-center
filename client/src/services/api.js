@@ -8,6 +8,17 @@ const api = axios.create({
   timeout: 15000,
 });
 
+if (
+  typeof window !== 'undefined' &&
+  !import.meta.env.VITE_API_URL &&
+  window.location.hostname !== 'localhost' &&
+  window.location.hostname !== '127.0.0.1'
+) {
+  console.warn(
+    '⚠ [Mahati Backend Warning]: VITE_API_URL is not defined in this environment! The app is attempting to reach http://localhost:5000/api. Please configure VITE_API_URL (e.g., https://your-backend.onrender.com/api) in your deployment settings.'
+  );
+}
+
 // Request interceptor to attach JWT token for admin endpoints
 api.interceptors.request.use(
   (config) => {
